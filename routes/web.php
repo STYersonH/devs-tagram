@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +34,17 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 // get : cuando visitamos un sitio
 Route::post('/register', [RegisterController::class, 'store']);
 // post : cuando enviamos un formulario
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store']); // enviar informacion al servidor
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+// cuando esta entre llaves es una variable, User es un model
+// si colocamos el nombre del model, estamos usando un "route model binding"
+// user es el id (1, 20, 22, 14, ...)
+// user:username sera el username del registro que se buscara
+Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
+// el metodo para crear sera create
+Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
+
+Route::post('imagenes', [ImagenController::class, 'store'])->name('imagenes.store');

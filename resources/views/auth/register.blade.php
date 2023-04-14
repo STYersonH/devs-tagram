@@ -50,7 +50,7 @@
                     @enderror
                 </div>
                 <div class="mb-5">
-                    <label for="enail" class=" mb-2 block uppercase text-gray-500 font-bold">
+                    <label for="email" class=" mb-2 block uppercase text-gray-500 font-bold">
                         email
                     </label>
                     <input 
@@ -59,7 +59,7 @@
                         name="email"
                         placeholder="Tu email de registro"
                         class="border p-3 w-full rounded-xl @error('email') border-red-500 @enderror"
-                        value="{{ old('') }}" 
+                        value="{{ old('email') }}" 
                     />
                     @error('email')
                         <p class=" bg-red-500 text-white my-1 rounded-xl text-sm p-2 text-center"> {{$message }} </p> <!-- $message es automatico dependiendo del error -->
@@ -85,6 +85,7 @@
                     <label for="password_confirmation" class=" mb-2 block uppercase text-gray-500 font-bold">
                         repetir password
                     </label>
+                    <!-- password_confirmation siempre (neto de laravel) -->
                     <input 
                         id="password_confirmation"
                         type="password"
