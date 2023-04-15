@@ -10,6 +10,29 @@ const dropzone = new Dropzone("#dropzone", {
     dictRemoveFile: "Borrar Archivo",
     maxFiles: 1,
     uploadMultiple: false,
+
+    //se ejecutara una vez se cree dropzone
+    init: function () {
+        if (document.querySelector('[name="imagen"]').value.trim()) {
+            //trim elimina espacios en blanco
+            const imagenPublicada = {};
+            imagenPublicada.size = 1234;
+            imagenPublicada.name =
+                document.querySelector('[name="imagen"]').value;
+
+            this.options.addedfile.call(this, imagenPublicada);
+            this.options.thumbnail.call(
+                this,
+                imagenPublicada,
+                `/uploads/${imagenPublicada.name}`
+            );
+
+            imagenPublicada.previewElement.classList.add(
+                "dz-success",
+                "dz-complete"
+            );
+        }
+    },
 });
 
 // -- EVENTOS PARA DEBUGGEAR
@@ -23,6 +46,9 @@ dropzone.on("sending", function (file, xhr, formData) {
 dropzone.on("success", function (file, response) {
     // esta respuesta es la que obtenemos del controlador
     console.log("response: ", response);
+    console.log("imagen: ", response.Imagen);
+    //darle el valor a la etiqueta del input de imagen
+    document.querySelector('[name="imagen"]').value = response.Imagen;
 });
 
 dropzone.on("error", function (file, message) {
@@ -31,4 +57,5 @@ dropzone.on("error", function (file, message) {
 
 dropzone.on("removedfile", function () {
     console.log("Archivo eliminado");
+    document.querySelector('[name="imagen"]').value = "";
 });

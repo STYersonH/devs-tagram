@@ -17,7 +17,11 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // los factories usan la libreria Faker
+            'titulo' => $this->faker->sentence(5), // crear un enunciado
+            'descripcion' => $this->faker->sentence(20),
+            'imagen' => $this->faker->uuid().'.jpg', // que las imagenes tengan el formato requerido
+            'user_id' => $this->faker->randomElement([7, 2, 8, 5]),
         ];
     }
 }

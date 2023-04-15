@@ -25,7 +25,7 @@
             </form>
         </div>
         <div class="md:w-1/2 p-10 bg-white rounded-lg shadow-xl mt-10 md:mt-0">
-            <form action="{{ route('register') }}" method="POST" novalidate> <!-- al ir alli aparede 419 | PAGE EXPIRED   -->
+            <form action="{{ route('posts.store') }}" method="POST" novalidate> <!-- al ir alli aparede 419 | PAGE EXPIRED   -->
                 @csrf <!-- para evitar este tipo de ataques -->
                 <div class="mb-5">
                     <label for="titulo" class=" mb-2 block uppercase text-gray-500 font-bold ">
@@ -61,6 +61,19 @@
                     
                     <!-- error por validacion en el controlador -->
                     @error('descripcion')
+                        <p class=" bg-red-500 text-white my-1 rounded-xl text-sm p-2 text-center"> {{$message }} </p> <!-- $message es automatico dependiendo del error -->
+                    @enderror
+                </div>
+
+                <div class=" mb-5">
+                    <!-- se recomienda que el nombre sea el mismo que en la BD -->
+                    <!-- con old('imagen') mantenemos en el campo el nombre de la imagen que la usaremos -->
+                    <input 
+                        type="hidden" 
+                        name="imagen" 
+                        value="{{old('imagen')}}" 
+                    >
+                    @error('imagen')
                         <p class=" bg-red-500 text-white my-1 rounded-xl text-sm p-2 text-center"> {{$message }} </p> <!-- $message es automatico dependiendo del error -->
                     @enderror
                 </div>

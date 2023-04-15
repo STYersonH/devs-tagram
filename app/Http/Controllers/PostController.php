@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -22,8 +23,19 @@ class PostController extends Controller
         ]);
     }
 
+    // nos permite tener el formulario para visualizar
     public function create()
     {
         return view('posts.create');
+    }
+
+    // es el que almacena en la BD
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'titulo' => 'required|max:255',
+            'descripcion' => 'required',
+            'imagen' => 'required',
+        ]);
     }
 }
