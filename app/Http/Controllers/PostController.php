@@ -73,4 +73,13 @@ class PostController extends Controller
         // una vez creado el post redirijir al perfil
         return redirect()->route('posts.index', auth()->user()->username);
     }
+
+    // show : se usa para mostrar un recurso
+    // al ser un route model binding recibe un $post, que se puede usar aqui
+    public function show(Post $post)
+    {
+        return view('posts.show', [
+            'post' => $post,
+        ]);
+    }
 }

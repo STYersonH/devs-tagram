@@ -45,7 +45,8 @@
                 <!-- iterar entre los posts -->
                 @foreach ($posts as $post)
                     <div>
-                        <a href="#">
+                        <!-- se pasa un objeto $post, pero ese se mapea y Laravel averigua lo necesario para el URL -->
+                        <a href="{{ route('posts.show', $post) }}">
                             <img src="{{ asset('uploads') . '/' . $post->imagen }}" alt="Imagen del post {{  $post->imagen }}">
                         </a>
                     </div>
@@ -54,7 +55,7 @@
 
             <div class="mt-5">
                 <!-- la paginacion va aqui -->
-                {{ $posts->links() }}
+                {{ $posts->links('posts.show') }}
             </div>
         @else
             <p class="text-gray-600 uppercase text-sm text-center font-bold">No hay posts</p>

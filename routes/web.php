@@ -47,5 +47,7 @@ Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.in
 // el metodo para crear sera create
 Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+// Get : visitamos una URL
+Route::get('/post/{post}', [PostController::class, 'show'])->name('post.show');
 
 Route::post('imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
