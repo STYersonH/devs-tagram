@@ -76,7 +76,7 @@ class PostController extends Controller
 
     // show : se usa para mostrar un recurso
     // al ser un route model binding recibe un $post, que se puede usar aqui
-    public function show(Post $post)
+    public function show(User $user, Post $post)
     {
         return view('posts.show', [
             'post' => $post,
