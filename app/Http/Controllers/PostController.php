@@ -12,7 +12,8 @@ class PostController extends Controller
     public function __construct()
     {
         // de esta manera revisara que el usuario este autenticado
-        $this->middleware('auth'); // si no esta autenticado redireciona a login(byLaravel)
+        $this->middleware('auth')->except(['show', 'index']); // si no esta autenticado redireciona a login(byLaravel)
+        // except permite proteger excepto ciertos metodos
     }
 
     // al usar un route model binding, se espera un Model

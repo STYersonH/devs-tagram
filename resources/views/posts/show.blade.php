@@ -6,8 +6,8 @@
 
 
 @section('contenido')
-    <div class="container mx-auto flex">
-        <div class="md:w-1/2">
+    <div class="container mx-auto flex justify-center">
+        <div class="md:w-2/5">
             <img src="{{asset('uploads') . '/'. $post->imagen}}" alt="imagen del post {{$post->titulo}}">
             <div class="p-3">
                 <p>0 likes</p>
@@ -16,7 +16,7 @@
                 <!-- $post->user proviene de la definicion de muchos a uno que hicimos para el modelo -->
                 <p class="font-bold">{{ $post->user->username }}</p>
                 <p class="text-sm text-gray-500">
-                    <!-- gracias a la libreria Carbon, integrada en Laravel, manejo de fechas -->
+                    <!-- gracias a la api para fechas Carbon, integrada en Laravel, manejo de fechas -->
                     {{$post->created_at->diffForHumans()}}
                 </p>
                 <p class="mt-5">
@@ -24,8 +24,9 @@
                 </p>
             </div>
         </div>
-        <div class="md:w-1/2 p-5">
+        <div class="md:w-2/5 p-5">
             <div class="shadow bg-white p-5 rounded-xl">
+                @auth
                 <p class="text-xl font-bold text-center mb-4">Agrega un Nuevo comentario</p>
 
                 <form action="">
@@ -49,6 +50,7 @@
 
                     <input type="submit" value="Comentar" class="bg-sky-600 text-white p-2 w-full uppercase font-bold text-sm rounded-2xl">
                 </form>
+                @endauth
             </div>
         </div>
     </div>
