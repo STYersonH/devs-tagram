@@ -20,6 +20,8 @@ class Post extends Model
 
     public function user() // siguiendo convenciones de laravel
     {
-        return $this->belongsTo(User::class); // relation Belongs to
+        // return $this->belongsTo(User::class); // relation Belongs to
+        // cargar la consulta con informacion innecesaria
+        return $this->belongsTo(User::class)->select(['name', 'username']); // traer solo name y username
     }
 }

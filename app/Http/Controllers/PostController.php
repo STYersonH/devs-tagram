@@ -18,9 +18,14 @@ class PostController extends Controller
     // al usar un route model binding, se espera un Model
     public function index(User $user)
     {
+        // estamos capturando los posts del usuario dado
+        $posts = Post::where('user_id', $user->id)->paginate(4); // para paginar en la vista
+        // $posts = Post::where('user_id', $user->id)->get();
+
         // dd($user); //muestra la informacion del registro con ese id
         return view('dashboard', [
             'user' => $user, // llamo a dashboard y le paso $user
+            'posts' => $posts, // se le pasa a la vista los posts
         ]);
     }
 
@@ -55,6 +60,15 @@ class PostController extends Controller
         $post->imagen = $request->imagen;
         $post->user_id = auth()->user()->id;
         $post->save();*/
+
+        // Otra forma mas al estilo de Laravel
+        /*
+        $request->user()->posts()->create([
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'imagen' => $request->imagen,
+            'user_id' => auth()->user()->id,
+        ]);*/
 
         // una vez creado el post redirijir al perfil
         return redirect()->route('posts.index', auth()->user()->username);
