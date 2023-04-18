@@ -17,6 +17,7 @@ const dropzone = new Dropzone("#dropzone", {
             //trim elimina espacios en blanco
             const imagenPublicada = {};
             imagenPublicada.size = 1234;
+            // en este punto se recobra la imagen si los otros campos estaban mal
             imagenPublicada.name =
                 document.querySelector('[name="imagen"]').value;
 

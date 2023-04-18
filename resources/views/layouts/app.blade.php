@@ -58,7 +58,7 @@
             <!-- mostrar en caso de no estar autenticado -->
             @guest
                 <nav class="flex gap-2">
-                    <a href="#" class="font-bold uppercase text-gray-600 text-sm">Login</a>
+                    <a href="{{route('login')}}" class="font-bold uppercase text-gray-600 text-sm">Login</a>
                     <!-- a route le pasamos alguna ruta registrada, toma el nombre y no la url como tal -->
                     <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Crear cuenta</a>
                 </nav>

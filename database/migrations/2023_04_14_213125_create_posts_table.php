@@ -17,7 +17,7 @@ return new class() extends Migration {
             $table->string('imagen');
             // laravel es tan inteligente que basta eso para relacionarla con la tabla users
             // si un usuario elimina su cuenta se lleva sus posts
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // user_id se usa para relacionarla con user inteligentemente
             $table->timestamps();
         });
     }
