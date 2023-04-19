@@ -6,7 +6,7 @@
 
 
 @section('contenido')
-    <div class="container mx-auto flex justify-center">
+    <div class="container mx-auto md:flex justify-center">
         <div class="md:w-2/5">
             <img src="{{asset('uploads') . '/'. $post->imagen}}" alt="imagen del post {{$post->titulo}}">
             <div class="p-3">
@@ -29,7 +29,15 @@
                 @auth
                 <p class="text-xl font-bold text-center mb-4">Agrega un Nuevo comentario</p>
 
-                <form action="">
+                <!-- desde el comentarioController al usar with -->
+                @if (session('mensaje'))
+                    <div class=" bg-green-500 p-2 rounded-2xl mb-6 text-white text-center uppercase font-bold">
+                        {{session('mensaje')}}
+                    </div>
+                @endif
+
+                <form action="{{route('comentarios.store', ['post' => $post, 'user' => $user])}}" method="POST">
+                    @csrf <!-- to avoid 419 | PAGE EXPIRED -->
                     <div class="mb-5">
                         <label for="comentario" class=" mb-2 block uppercase text-gray-500 font-bold ">
                             agrega un comentario
