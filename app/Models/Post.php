@@ -24,4 +24,9 @@ class Post extends Model
         // cargar la consulta con informacion innecesaria
         return $this->belongsTo(User::class)->select(['name', 'username']); // traer solo name y username
     }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
+    }
 }

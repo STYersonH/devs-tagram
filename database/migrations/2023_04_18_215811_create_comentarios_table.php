@@ -14,8 +14,8 @@ return new class() extends Migration {
             $table->id();
             // crea un foreign key que va a estar asociado con la tabla del id
             // vendria a ser una relacion de muchos a muchos y vendria a ser como una tabla pivote
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('post_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // si se elimina el usuario se elimina sus comentarios
+            $table->foreignId('post_id')->constrained()->onDelete('cascade'); // si se elimina el post se elimina los comentarios
             $table->string('comentario');
             $table->timestamps();
         });

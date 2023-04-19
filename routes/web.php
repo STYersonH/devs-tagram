@@ -50,6 +50,9 @@ Route::get('/post/create', [PostController::class, 'create'])->name('posts.creat
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 // Get : visitamos una URL
 Route::get('/{user:username}/post/{post}', [PostController::class, 'show'])->name('posts.show');
+// Eliminar un post
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 Route::post('/{user:username}/post/{post}', [ComentarioController::class, 'store'])->name('comentarios.store');
 
 Route::post('imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
