@@ -37,13 +37,14 @@
 
                 <!-- Mostrar seguidores -->
                 <p class="text-gray-800 text-sm mb-3 font-bold mt-5">
-                    0
-                    <span class="font-normal">Seguidores</span>
+                    {{ $user->followers->count() }}
+                    <!-- @ choice decidira que aplicar dependiendo del numero -->
+                    <span class="font-normal"> @choice('seguidor|seguidores', $user->followers->count()) </span>
                 </p>
 
                 <!-- Mostrar cuentas seguidas -->
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0
+                    {{ $user->followings->count() }}
                     <span class="font-normal">Siguiendo</span>
                 </p>
 
@@ -55,29 +56,33 @@
 
                 @auth <!-- a user not authenticated can't see -->
                 @if ($user->id !== auth()->user()->id)
-                    <form 
-                        action="{{ route('users.seguir', $user) }}"
-                        method="POST"
-                    >   <!-- $user is the person followed by us -->
-                        @csrf <!-- evitar error 409 | expiro la conexion -->
-                        <input 
-                            type="submit"
-                            class="bg-blue-600 text-white uppercase rounded-xl px-3 py-1 text-xs font-bold cursor-pointer"
-                            value="follow"
+                    <!-- si no es seguidor entonces dar la opcion a dar seguir -->
+                    @if( !$user->siguiendo( auth()->user() ))
+                        <form 
+                            action="{{ route('users.seguir', $user) }}"
+                            method="POST"
+                        >   <!-- $user is the person followed by us -->
+                            @csrf <!-- evitar error 409 | expiro la conexion -->
+                            <input 
+                                type="submit"
+                                class="bg-blue-600 text-white uppercase rounded-xl px-3 py-1 text-xs font-bold cursor-pointer"
+                                value="follow"
+                            >
+                        </form>
+                    @else
+                        <form 
+                            action="{{ route('users.no-seguir', $user) }}"
+                            method="POST"
                         >
-                    </form>
-                    <form 
-                        action="{{ route('users.no-seguir', $user) }}"
-                        method="POST"
-                    >
-                        @csrf <!-- evitar error 409 | expiro la conexion -->
-                        @method('DELETE')
-                        <input 
-                            type="submit"
-                            class="bg-red-600 text-white uppercase rounded-xl px-3 py-1 text-xs font-bold cursor-pointer"
-                            value="unfollow"
-                        >
-                    </form>
+                            @csrf <!-- evitar error 409 | expiro la conexion -->
+                            @method('DELETE')
+                            <input 
+                                type="submit"
+                                class="bg-red-600 text-white uppercase rounded-xl px-3 py-1 text-xs font-bold cursor-pointer"
+                                value="unfollow"
+                            >
+                        </form>
+                    @endif
                 @endif      
                 @endauth
             </div>
