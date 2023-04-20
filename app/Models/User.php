@@ -47,14 +47,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // sigue las convenciones
     public function posts()
     {
         // relation one to many
         return $this->hasMany(Post::class);
     }
 
+    // sigue las convenciones
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
+
+    // no sigue las convenciones
+    // Almacena los seguidores de un usuario
+    public function followers()
+    {
+        // un usuario puede tener seguidores con varios usuarios
+        // el metodo followers en la tabla de followers pertenece a muchos usuarios
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    // Almacenar los que seguimos
 }

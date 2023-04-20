@@ -52,6 +52,34 @@
                     {{$user->posts->count()}}
                     <span class="font-normal">Posts</span>
                 </p>
+
+                @auth <!-- a user not authenticated can't see -->
+                @if ($user->id !== auth()->user()->id)
+                    <form 
+                        action="{{ route('users.seguir', $user) }}"
+                        method="POST"
+                    >   <!-- $user is the person followed by us -->
+                        @csrf <!-- evitar error 409 | expiro la conexion -->
+                        <input 
+                            type="submit"
+                            class="bg-blue-600 text-white uppercase rounded-xl px-3 py-1 text-xs font-bold cursor-pointer"
+                            value="follow"
+                        >
+                    </form>
+                    <form 
+                        action="{{ route('users.no-seguir', $user) }}"
+                        method="POST"
+                    >
+                        @csrf <!-- evitar error 409 | expiro la conexion -->
+                        @method('DELETE')
+                        <input 
+                            type="submit"
+                            class="bg-red-600 text-white uppercase rounded-xl px-3 py-1 text-xs font-bold cursor-pointer"
+                            value="unfollow"
+                        >
+                    </form>
+                @endif      
+                @endauth
             </div>
         </div>
     </div>

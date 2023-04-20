@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -49,11 +50,6 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
 Route::post('/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
 
-// cuando esta entre llaves es una variable, User es un model
-// si colocamos el nombre del model, estamos usando un "route model binding"
-// user es el id (1, 20, 22, 14, ...)
-// user:username sera el username del registro que se buscara
-Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
 // el metodo para crear sera create
 Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
@@ -70,3 +66,13 @@ Route::post('imagenes', [ImagenController::class, 'store'])->name('imagenes.stor
 Route::post('posts/{post}/likes', [LikeController::class, 'store'])->name('posts.likes.store');
 // quitar el like
 Route::delete('posts/{post}/likes', [LikeController::class, 'destroy'])->name('posts.likes.destroy');
+
+// cuando esta entre llaves es una variable, User es un model
+// si colocamos el nombre del model, estamos usando un "route model binding"
+// user es el id (1, 20, 22, 14, ...)
+// user:username sera el username del registro que se buscara
+Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
+
+// Siguiendo a Usuarios
+Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.seguir'); // para seguir a alquien
+Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.no-seguir'); // para dejar de seguir a alguien
