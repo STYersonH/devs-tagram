@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -23,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // visito esta url y realizo lo que hay en la funcion
-Route::get('/', function () {
-    return view('principal');
-});
+Route::get('/', HomeController::class)->name('home');
 
 // la funcion se envio al controlador registerController
 // es importante imoprtar el controlador

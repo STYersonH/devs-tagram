@@ -21,7 +21,7 @@ class PostController extends Controller
     public function index(User $user)
     {
         // estamos capturando los posts del usuario dado
-        $posts = Post::where('user_id', $user->id)->paginate(4); // para paginar en la vista
+        $posts = Post::where('user_id', $user->id)->latest()->paginate(4); // para paginar en la vista
         // $posts = Post::where('user_id', $user->id)->get();
 
         // dd($user); //muestra la informacion del registro con ese id

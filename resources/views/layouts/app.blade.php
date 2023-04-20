@@ -22,7 +22,11 @@
 <body class=" bg-gray-100">
     <header class=" p-5 border-b bg-white font-black">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-black">Devs-tagram</h1>
+            <h1 class="text-3xl font-black">
+                <a href="{{route('home')}}">
+                    Devs-tagram
+                </a>
+            </h1>
             
             <!-- una forma de usar la restriccion de autenticacion para mostrar HTML -->
             @if(auth()->user())
