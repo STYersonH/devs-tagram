@@ -17,6 +17,8 @@
     @vite('resources/css/app.css')
     <!-- para que se apliquen las cosas de js a nuestro HTML -->
     @vite('resources/js/app.js')
+
+    @livewireStyles <!-- se agregaran los estilos de livewire -->
 </head>
 
 <body class=" bg-gray-100">
@@ -82,6 +84,8 @@
     <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
         Devs-tagram - Todos los derechos reservados {{ now()->year }}
     </footer>
+
+    @livewireScripts <!-- cargar los scripts de livewire : para obtener las peticiones de AJAX en tiempo real -->
 </body>
 
 </html>

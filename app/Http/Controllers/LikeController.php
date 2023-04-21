@@ -10,6 +10,7 @@ class LikeController extends Controller
     public function store(Request $request, Post $post)
     {
         // dd($request->user()->id); // asi obtenemos el id de quien dio el like
+
         $post->likes()->create([
             'user_id' => $request->user()->id,
         ]);
