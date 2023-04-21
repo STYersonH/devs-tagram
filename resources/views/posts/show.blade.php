@@ -50,7 +50,9 @@
             </div>
             <div>
                 <!-- $post->user proviene de la definicion de muchos a uno que hicimos para el modelo -->
-                <p class="font-bold">{{ $post->user->username }}</p>
+                <a href="{{route('posts.index', $post->user)}}"> <!-- en este caso $post->user->username se captura gracias a laravel -->
+                    <p class="font-bold">{{ $post->user->username }}</p>
+                </a>
                 <p class="text-sm text-gray-500">
                     <!-- gracias a la api para fechas Carbon, integrada en Laravel, manejo de fechas -->
                     {{$post->created_at->diffForHumans()}}
